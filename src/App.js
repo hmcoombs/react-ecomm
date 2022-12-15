@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Cart from "./components/Cart";
+import ProductMainPage from "./components/ProductMainPage";
+import ProductDetailPage from "./components/ProductDetailPage";
+import Checkout from "./components/Checkout";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+
+import React, { useState, useEffect } from "react";
 
 function App() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const storeApi = fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((json) => setProducts(json));
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="nav1">
+        <NavBar />
+      </div>
+
+      <div className="App">
+        <header className="App-header">
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={<ProductMainPage products={products} />}
+            />
+            <Route exact path="/Products/:id" element={<ProductDetailPage />} />
+            <Route exact path="/Cart" element={<Cart />} />
+            <Route exact path="/Checkout" element={<Checkout />} />
+          </Routes>
+        </header>
+      </div>
+
+      <Footer />
+    </Router>
   );
 }
 
