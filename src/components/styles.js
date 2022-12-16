@@ -26,10 +26,3 @@ export const StyledButton = styled.button`
   border-radius: 5px;
   background-color: #98ddf5;
 `;
-// // export const StyledFormDiv = styled.div`
-// //   // style= {
-// //   //    {
-// //   //     border: "5px solid black";
-// //   //   }
-// //   // }
-// `;
